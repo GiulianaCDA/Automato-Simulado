@@ -3,6 +3,7 @@ from pygame.locals import MOUSEBUTTONDOWN, Rect, QUIT
 from sys import exit
 import pygame.freetype
 from time import sleep
+from images import getImages
 
 pygame.init()
 
@@ -98,11 +99,14 @@ def pageOption(text):
 
 
 #DISPLAY WINDOW
+pygame.display.set_caption('Simulação de caixa eletrônico') 
+icon = pygame.image.load("images/icon.png")
+pygame.display.set_icon(icon) 
 sizeBackground = width, height = 1300, 650
 screen = pygame.display.set_mode(sizeBackground)
-background = pygame.image.load("background.png")
+background = pygame.image.load("images/background.png")
 background = pygame.transform.scale(background, (width, height))
-background2 = pygame.image.load("background3.png") 
+background2 = pygame.image.load("images/background2.png") 
 background2 = pygame.transform.scale(background2, (width, height))
 screen.blit(background, (0,0))
 page = 'home'
@@ -114,7 +118,7 @@ purpleColor = (50, 47, 93)
 
 #BUTTONS
 playbutton = pygame.Rect(450, 400, 120, 120)
-playbuttonImg = pygame.image.load("playbutton.gif") 
+playbuttonImg = pygame.image.load("images/playbutton.gif") 
 playbuttonImg = pygame.transform.scale(playbuttonImg, (120, 120))
 playfont = pygame.freetype.Font("Bobby-Jones-Soft.otf", 50)
 screen.blit(playbuttonImg, playbutton) 
@@ -129,40 +133,10 @@ parcialButton = pygame.Rect(100, 350, 350, 40)
 handCursor = pygame.SYSTEM_CURSOR_HAND   
 arrowCursor = pygame.SYSTEM_CURSOR_ARROW  
 
-#OPTIONS IMAGES
-q0 = pygame.image.load("q0.png") 
-q0 = pygame.transform.scale(q0, (768, 432))
-
-q1a = pygame.image.load("q1a.png")
-q1a = pygame.transform.scale(q1a, (768, 432))
-q1b = pygame.image.load("q1b.png") 
-q1b = pygame.transform.scale(q1b, (768, 432))
-
-q2a = pygame.image.load("q2a.png")
-q2a = pygame.transform.scale(q2a, (768, 432))
-q2c = pygame.image.load("q2c.png")
-q2c = pygame.transform.scale(q2c, (768, 432))
-
-q3a = pygame.image.load("q3a.png")
-q3a = pygame.transform.scale(q3a, (768, 432))
-q3d = pygame.image.load("q3d.png")
-q3d = pygame.transform.scale(q3d, (768, 432))
-
-q4a = pygame.image.load("q4a.png")
-q4a = pygame.transform.scale(q4a, (768, 432))
-q4e = pygame.image.load("q4e.png")
-q4e = pygame.transform.scale(q4e, (768, 432))
-
-q5c = pygame.image.load("q5c.png")
-q5c = pygame.transform.scale(q5c, (768, 432))
-q5f = pygame.image.load("q5f.png")
-q5f = pygame.transform.scale(q5f, (768, 432))
-
-q6c = pygame.image.load("q6c.png")
-q6c = pygame.transform.scale(q6c, (768, 432))
-q6g = pygame.image.load("q6g.png")
-q6g = pygame.transform.scale(q6g, (768, 432))
-
+#IMAGES
+imgs = getImages()
+x = 730
+y = 100
 
 home()
 
@@ -179,7 +153,7 @@ while True:
             if event.type == MOUSEBUTTONDOWN:
                 page = 'options'
                 screen.blit(background2, (0,0))
-                screen.blit(q0, (660, 140))                
+                screen.blit(imgs['q0'], (x, y))                
                 optionsButtons = options()
         else:
             pygame.mouse.set_cursor(arrowCursor)
@@ -189,7 +163,7 @@ while True:
             pygame.mouse.set_cursor(handCursor)
             if event.type == MOUSEBUTTONDOWN:
                 screen.blit(background2, (0,0))
-                screen.blit(q1b, (660, 140))
+                screen.blit(imgs['q1b'], (x, y))
                 prevState = 'saque'
                 pageOption('saque')
                 page = 'pageOption'
@@ -198,7 +172,7 @@ while True:
             pygame.mouse.set_cursor(handCursor)
             if event.type == MOUSEBUTTONDOWN:
                 screen.blit(background2, (0,0))
-                screen.blit(q3d, (660, 140))
+                screen.blit(imgs['q3d'], (x, y))
                 prevState = 'emprestimo'
                 pageOption('empréstimo')
                 page = 'pageOption'
@@ -207,7 +181,7 @@ while True:
             pygame.mouse.set_cursor(handCursor)
             if event.type == MOUSEBUTTONDOWN:
                 screen.blit(background2, (0,0))
-                screen.blit(q4e, (660, 140))
+                screen.blit(imgs['q4e'], (x, y))
                 prevState = 'saldo'
                 pageOption('Ver saldo')
                 page = 'pageOption'
@@ -216,7 +190,7 @@ while True:
             pygame.mouse.set_cursor(handCursor)
             if event.type == MOUSEBUTTONDOWN:
                 screen.blit(background2, (0,0))
-                screen.blit(q2c, (660, 140))
+                screen.blit(imgs['q2c'], (x, y))
                 prevState = 'pagamento'
                 pageOption('pagamento')
                 page = 'pagamento'
@@ -230,13 +204,13 @@ while True:
                 page = 'options'
                 screen.blit(background2, (0,0))
                 if prevState == 'saque':
-                    screen.blit(q1a, (660, 140)) 
+                    screen.blit(imgs['q1a'], (x, y)) 
                 elif prevState == 'emprestimo':
-                    screen.blit(q3a, (660, 140)) 
+                    screen.blit(imgs['q3a'], (x, y)) 
                 elif prevState == 'pagamento':  
-                    screen.blit(q2a, (660, 140)) 
+                    screen.blit(imgs['q2a'], (x, y)) 
                 elif prevState == 'saldo':
-                    screen.blit(q4a, (660, 140))    
+                    screen.blit(imgs['q4a'], (x, y))    
                 optionsButtons = options()
         else:
             pygame.mouse.set_cursor(arrowCursor)
@@ -247,7 +221,7 @@ while True:
 
             if event.type == MOUSEBUTTONDOWN:
                 screen.blit(background2, (0,0))
-                screen.blit(q5f, (660, 140))
+                screen.blit(imgs['q5f'], (x, y))
                 pageOption('pagamento total')
                 page = 'total'
 
@@ -256,7 +230,7 @@ while True:
 
             if event.type == MOUSEBUTTONDOWN:
                 screen.blit(background2, (0,0))
-                screen.blit(q6g, (660, 140))
+                screen.blit(imgs['q6g'], (x, y))
                 pageOption('pagamento parcial')
                 page = 'parcial'
 
@@ -265,7 +239,7 @@ while True:
 
             if event.type == MOUSEBUTTONDOWN:
                 screen.blit(background2, (0,0))
-                screen.blit(q2a, (660, 140)) 
+                screen.blit(imgs['q2a'], (x, y)) 
                 options()
                 page = 'options'
         else:
@@ -277,9 +251,9 @@ while True:
                 screen.blit(background2, (0,0))
                 pagamentoPage()
                 if page == 'total':
-                    screen.blit(q5c, (660, 140))
+                    screen.blit(imgs['q5c'], (x, y))
                 else:
-                    screen.blit(q6c, (660, 140))
+                    screen.blit(imgs['q6c'], (x, y))
                 sleep(0.2)
                 page = 'pagamento'
         else:
